@@ -1,0 +1,19 @@
+{
+  "name": "vendor-task",
+  "version": "1.0.0",
+  "description": "vendor task only in cli",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vendor"
+  ],
+  "author": "sakthivel j",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0"
+  }
+}
