@@ -10,7 +10,13 @@
 
 <body>
     <h1>Vendor Management System</h1>
-    <button type="button" id="vendor">Vendor</button>
+
+    <% if (data && data.name) { %>
+        <h2>Welcome <%= data.name %>
+        </h2>
+        <% } %>
+            <button type="button" id="logout">Logout</button>
+            <button type="button" id="vendor">Vendor</button>
 </body>
 
 </html>

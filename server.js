@@ -1,11 +1,36 @@
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
+const port = process.env.PORT || 3000;
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
-const vendorRouter = require('./routes/vendorRoutes');
-const port = process.env.PORT || 5000;
+const session = require('express-session');
 
+const vendorRouter = require('./routes/vendorRoutes');
+const mongodbRouter = require('./routes/mongodb');
+const loginRouter = require('./routes/loginRoutes');
+const indexRouter = require('./routes/indexRouter')
 const app = express();
+// Set up session management
+const MongoStore = require('connect-mongo');
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI,
+            dbName: process.env.AUTH_DB,
+            collectionName: 'sessions',
+        }),
+        cookie: {
+            maxAge: 3600000,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+        },
+    })
+);
 
 app.use(express.json());
 const corsOptions = {
@@ -26,13 +51,18 @@ app.use(express.static('public'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use('/vendor', vendorRouter);
+function checkLogin(req, res, next) {
+    if (!req.session.user) {
+        return res.redirect('/auth/login');
+    }
+    next();
+}
+app.use('/', indexRouter);
+app.use('/vendor', checkLogin, vendorRouter);
+app.use('/db', checkLogin, mongodbRouter);
+app.use('/auth', loginRouter);
 
-
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Vendor Management System - Homepage' });
-});
 app.listen(port, () => {
     console.log(`Server at http://localhost:${port}`)
-})
+});
 module.exports = app;

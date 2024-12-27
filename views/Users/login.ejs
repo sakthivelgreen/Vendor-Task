@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="/javascripts/auth/login.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="form-container">
+                <form action="/auth/login" method="post" id="login-form">
+                    <div class="input-container">
+                        <label for="user-type">You are:</label>
+                        <select name="user_type" id="user-type">
+                            <option value="admin">Admin</option>
+                            <option value="vendor">Vendor</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-container">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-container">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <div class="btn-container">
+                        <button type="submit">Login</button>
+                        <hr>
+                        <p>Don't have an account? <a href="/auth/signup">Signup!</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
