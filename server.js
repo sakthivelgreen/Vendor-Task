@@ -7,9 +7,10 @@ var cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const vendorRouter = require('./routes/vendorRoutes');
-const mongodbRouter = require('./routes/mongodb');
+const mongodbRouter = require('./routes/mongodbRoutes');
 const loginRouter = require('./routes/loginRoutes');
-const indexRouter = require('./routes/indexRouter')
+const indexRouter = require('./routes/indexRouter');
+const registerRouter = require('./routes/registerRouter');
 const app = express();
 // Set up session management
 const MongoStore = require('connect-mongo');
@@ -59,7 +60,8 @@ function checkLogin(req, res, next) {
 }
 app.use('/', indexRouter);
 app.use('/vendor', checkLogin, vendorRouter);
-app.use('/db', checkLogin, mongodbRouter);
+app.use('/db', mongodbRouter);
+app.use('/register', registerRouter);
 app.use('/auth', loginRouter);
 
 app.listen(port, () => {

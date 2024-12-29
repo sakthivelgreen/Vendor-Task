@@ -16,7 +16,7 @@ router.use(async (req, res, next) => {
 });
 router.get('/login', (req, res) => {
     if (!req.session.user) {
-        res.render('Users/login', { title: 'Login' })
+        res.render('login', { title: 'Login' })
     }
     else {
         res.redirect('/')

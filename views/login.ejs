@@ -36,7 +36,13 @@
                     <div class="btn-container">
                         <button type="submit">Login</button>
                         <hr>
-                        <p>Don't have an account? <a href="/auth/signup">Signup!</a></p>
+                        <p>Don't have an account?
+                            <select name="type" id="type">
+                                <option value="vendor">Vendor</option>
+                                <option value="user">User</option>
+                            </select>
+                            <button type="button" id="register_account">Register</button>
+                        </p>
                     </div>
                 </form>
             </div>
