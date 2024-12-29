@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <link rel="stylesheet" href="/stylesheets/layouts.css">
+    <script type="module" src="/javascripts/users/dashboard.js" defer></script>
+</head>
+
+<body class="">
+    <h1>Vendor Management System</h1>
+
+    <% if (data && data.name) { %>
+        <h2>Welcome <%= data.name %>
+        </h2>
+        <% } %>
+            <button type="button" id="logout">Logout</button>
+            <button type="button" id="vendor">Vendors</button>
+</body>
+
+</html>

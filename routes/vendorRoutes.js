@@ -16,8 +16,10 @@ router.use(async (req, res, next) => {
 
 router.get('/list', async (req, res) => {
     let data = await db.collection('vendors').find({}).toArray();
-    console.log(data);
     res.status(200).send(data);
+});
+router.get('/dashboard', async (req, res) => {
+    res.render('vendors/dashboard', ({ title: `${req.session.user.name} - Dashboard`, data: req.session.user }))
 });
 
 module.exports = router;

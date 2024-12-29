@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const vendorRouter = require('./routes/vendorRoutes');
+const userRouter = require('./routes/userRoutes');
 const mongodbRouter = require('./routes/mongodbRoutes');
 const loginRouter = require('./routes/loginRoutes');
 const indexRouter = require('./routes/indexRouter');
@@ -60,6 +61,7 @@ function checkLogin(req, res, next) {
 }
 app.use('/', indexRouter);
 app.use('/vendor', checkLogin, vendorRouter);
+app.use('/user', checkLogin, userRouter);
 app.use('/db', mongodbRouter);
 app.use('/register', registerRouter);
 app.use('/auth', loginRouter);

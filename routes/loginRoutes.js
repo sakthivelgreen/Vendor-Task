@@ -59,4 +59,16 @@ router.get('/logout', (req, res) => {
     });
 });
 
+
+router.get('/username', async (req, res) => {
+    try {
+        db = await getDB(process.env.AUTH_DB);
+        let result = await db.collection(process.env.AUTH_COLLECTION).find({}).toArray();
+        const usernames = result.map(obj => obj.username);
+        res.status(200).send({ users: usernames })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = router;

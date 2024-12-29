@@ -41,7 +41,19 @@ async function login(user, pass, type) {
             const error = await response.json(); // Expect JSON response with error message
             throw new Error(error.error || 'Unknown error occurred');
         }
-        window.location.href = '/'
+        switch (type.value) {
+            case 'admin':
+                window.location.href = '/';
+                break;
+            case 'vendor':
+                window.location.href = '/vendor/dashboard';
+                break;
+            case 'user':
+                window.location.href = '/user/dashboard';
+                break;
+            default:
+                break;
+        }
     } catch (err) {
         alert(err)
     }

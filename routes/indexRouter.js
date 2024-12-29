@@ -7,7 +7,12 @@ function checkLogin(req, res) {
 }
 router.get('/', (req, res) => {
     checkLogin(req, res)
-    res.render('index', { title: `${req.session.user.name} - Vendor Management System`, data: req.session.user });
+    if (req.session.user.type === 'admin') {
+        res.render('index', { title: `${req.session.user.name} - Vendor Management System`, data: req.session.user });
+    } else {
+        res.redirect(`${req.session.user.type}/dashboard`);
+
+    }
 });
 
 module.exports = router;

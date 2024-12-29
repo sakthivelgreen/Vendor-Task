@@ -8,42 +8,37 @@
     <link rel="stylesheet" href="/stylesheets/root.css">
     <link rel="stylesheet" href="/stylesheets/form.css">
     <link rel="stylesheet" href="/stylesheets/layouts.css">
+    <script type="module" src="/javascripts/users/register.js"></script>
 </head>
 
 <body class="centered">
-    <form action="/register/user" method="post" id="add-vendor-form" class="form">
+    <form id="add-user-form" class="form">
         <div>
-            <label for="vendor-name">Vendor Name</label>
-            <input type="text" name="vendor-name" id="vendor-name">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
         </div>
         <div>
-            <label for="">Registration Number</label>
-            <input type="text" name="" id="">
+            <label for="username">Choose Username</label>
+            <input type="text" name="username" id="username" required>
         </div>
         <div>
-            <label for="">Type</label>
-            <input type="text" name="" id="">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
         </div>
         <div>
-            <label for="">Services Provided</label>
-            <input type="text" name="" id="">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
         </div>
         <div>
-            <label for="">Location</label>
-            <input type="text" name="" id="">
+            <label for="phone">Mobile Number</label>
+            <input type="tel" name="phone" id="phone" maxlength="10">
         </div>
-        <div>
-            <label for="">Contact Person</label>
-            <input type="text" name="" id="">
-        </div>
-        <div>
-            <label for="">Contact Number</label>
-            <input type="text" name="" id="">
-        </div>
+
         <div>
             <button type="submit">
                 <%= msg %>
             </button>
+            <button type="button" id="cancel">Cancel </button>
         </div>
     </form>
 </body>

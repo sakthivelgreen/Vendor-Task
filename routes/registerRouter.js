@@ -41,8 +41,9 @@ router.post('/vendor', async (req, res) => {
 
         // insert into user collections
         const result_1 = await collection_users.insertOne(userObj);
-
-        res.status(201).json({ message: 'Vendor inserted successfully', id: result_1.insertedId });
+        if (result && result_1) {
+            res.status(201).json({ message: 'Vendor inserted successfully', id: result_1.insertedId });
+        }
     } catch (error) {
         console.error('Error creating vendor:', error);
         res.status(500).json({ error: 'Failed to create vendor' });
@@ -61,25 +62,41 @@ router.get('/user', (req, res) => {
     }
 });
 
+// store user
 router.post('/user', async (req, res) => {
+    const mongo = await getDB(process.env.AUTH_DB);
+    const collection_users = mongo.collection(process.env.AUTH_COLLECTION)
     try {
         const db = await getDB(); // Get the database instance
         const collection = db.collection('users');
         const newItem = req.body;
+        const userObj = {
+            'username': newItem.username,
+            'password': newItem.password,
+            'name': newItem.name,
+            'type': 'user'
+        }
+        delete newItem.username;
+        delete newItem.password;
 
         // Generate the next ID for the users
         const sequenceValue = await getNextSequenceValue('users', db);
         const newId = `user_${sequenceValue}`;
-        newItem._id = newId;
+        newItem.id = newId;
+        userObj._id = newId;
 
-        // Insert the new users into the collection
+        // Insert the new vendor into the collection
         const result = await collection.insertOne(newItem);
 
-        res.status(201).json({ message: 'users inserted successfully', id: result.insertedId });
+        // insert into user collections
+        const result_1 = await collection_users.insertOne(userObj);
+        if (result && result_1) {
+            res.status(201).json({ message: 'user inserted successfully', id: result_1.insertedId });
+        }
     } catch (error) {
-        console.error('Error creating users:', error);
-        res.status(500).json({ error: 'Failed to create users' });
+        console.error('Error creating user:', error);
+        res.status(500).json({ error: 'Failed to create user' });
+        rollbackSequenceIncrement('users', mongo)
     }
 })
-
 module.exports = router;
