@@ -25,6 +25,10 @@ router.get('/login', (req, res) => {
 // Login route to authenticate and set session
 router.post('/login', async (req, res) => {
     const { user_type, username, password } = req.body;
+    // Validate request body
+    if (!user_type || !username || !password) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
     let result = await db.collection(process.env.AUTH_COLLECTION).findOne({ type: user_type, username: username })
     if (result) {
         if (password === result.password) {
@@ -34,12 +38,12 @@ router.post('/login', async (req, res) => {
                 type: result.type
             }
             db = await getDB();
-            res.redirect('/');
+            return res.status(200).send({ message: 'Login successful' });
         } else {
-            res.status(400).send({ error: 'Invalid Username / Password' })
+            return res.status(400).json({ error: 'Invalid Username / Password' });
         }
     } else {
-        res.status(400).send({ error: 'Invalid Username / Password' })
+        return res.status(400).send({ error: 'Invalid Username / Password' })
     }
 });
 
