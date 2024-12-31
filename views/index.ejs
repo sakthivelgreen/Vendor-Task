@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="/stylesheets/root.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
     <script src="/javascripts/home/index.js" type="module" defer></script>
     <title>
         <%= title %>
@@ -10,14 +11,56 @@
 </head>
 
 <body>
-    <h1>Vendor Management System</h1>
+    <div class="wrapper">
+        <div class="container">
+            <header class="header">
+                <h2>Vendor Management System</h2>
+                <% if (data && data.name) { %>
+                    <h3>Welcome <%= data.name %>
+                    </h3>
+                    <% } %>
+            </header>
+            <div class="container-body">
+                <aside>
+                    <nav class="nav-list">
+                        <a id="vendor">Vendors</a>
+                        <a id="user">Users</a>
+                        <a id="contract">Contracts</a>
+                        <a id="contract">Ratings</a>
+                        <a id="contract">Performance Scores</a>
+                        <a id="logout">Logout</a>
+                    </nav>
+                </aside>
+                <main>
+                    <section class="vendors-section">
+                        <div class="section-head__vendors">
+                            <button id="add-vendor" class="success-btn" type="button">Add Vendor</button>
+                        </div>
+                        <div class="section-body__vendors">
+                            <table id="vendors-list__table"></table>
+                        </div>
+                    </section>
+                    <section class="users-section hidden">
+                        <div class="section-head__users ">
+                            <button type="button" id="add-user" class="success-btn">Add User</button>
+                        </div>
+                        <div class="section-body__users">
+                            <table id="users-list__table"></table>
+                        </div>
+                    </section>
+                    <section class="contracts-section hidden">
+                        <div class="section-head__contracts">
+                            <button type="button" id="add-contract" class="success-btn">Add Contract</button>
+                        </div>
+                        <div class="section-body__contracts">
+                            <table id="contracts-list__table"></table>
+                        </div>
+                    </section>
 
-    <% if (data && data.name) { %>
-        <h2>Welcome <%= data.name %>
-        </h2>
-        <% } %>
-            <button type="button" id="logout">Logout</button>
-            <button type="button" id="vendor">Vendor</button>
+                </main>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

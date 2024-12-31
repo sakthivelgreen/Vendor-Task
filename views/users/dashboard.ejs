@@ -6,20 +6,38 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/stylesheets/root.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
     <link rel="stylesheet" href="/stylesheets/form.css">
     <link rel="stylesheet" href="/stylesheets/layouts.css">
     <script type="module" src="/javascripts/users/dashboard.js" defer></script>
 </head>
 
-<body class="">
-    <h1>Vendor Management System</h1>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <header class="header">
+                <h2>Vendor Management System</h2>
 
-    <% if (data && data.name) { %>
-        <h2>Welcome <%= data.name %>
-        </h2>
-        <% } %>
-            <button type="button" id="logout">Logout</button>
-            <button type="button" id="vendor">Vendors</button>
+                <% if (data && data.name) { %>
+                    <h3>Welcome <%= data.name %>
+                    </h3>
+                    <% } %>
+            </header>
+            <div class="container-body">
+                <aside>
+                    <nav class="nav-list">
+                        <a id="home">Home</a>
+                        <a id="vendors">Vendors</a>
+                        <a id="contracts">Contracts</a>
+                        <a id="vendor-ratings">Ratings</a>
+                        <a id="logout">Logout</a>
+                    </nav>
+                </aside>
+                <main></main>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>

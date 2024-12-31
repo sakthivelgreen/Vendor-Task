@@ -7,63 +7,70 @@
     </title>
     <link rel="stylesheet" href="/stylesheets/root.css">
     <link rel="stylesheet" href="/stylesheets/form.css">
-    <link rel="stylesheet" href="/stylesheets/layouts.css">
     <script src="/javascripts/vendors/register.js" defer></script>
 </head>
 
-<body class="centered">
-    <form id="add-vendor-form" class="form">
-        <div>
-            <label for="vendor-name">Vendor Name</label>
-            <input type="text" name="vendorName" id="vendor-name" required>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="form-container">
+                <form id="add-vendor-form" class="form">
+                    <div>
+                        <label for="vendor-name">Vendor Name</label>
+                        <input type="text" name="vendorName" id="vendor-name" required>
+                    </div>
+                    <div>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    <div>
+                        <label for="registration-number">Registration Number</label>
+                        <input type="text" name="regNumber" id="registration-number">
+                    </div>
+                    <div>
+                        <label for="vendor-type">Type</label>
+                        <select name="vendorType" id="vendor-type">
+                            <option selected value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="services">Services Provided</label>
+                        <select name="services" id="services">
+                            <option disabled selected value="">Select Services</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="loaction">Location</label>
+                        <input type="text" name="location" id="location">
+                    </div>
+                    <div>
+                        <label for="contact-person">Contact Person</label>
+                        <input type="text" name="contactPerson" id="contact-person" required>
+                    </div>
+                    <div>
+                        <label for="contact-number">Contact Number</label>
+                        <input type="number" name="contactNumber" id="contact-number" maxlength="10" required>
+                    </div>
+                    <div>
+                        <label for="production-capacity">Production Capacity Per Month</label>
+                        <input type="number" name="productionCapacity" id="production-capacity" maxlength="10"
+                            minlength="10">
+                    </div>
+                    <div>
+                        <button type="submit">
+                            <%= msg %>
+                        </button>
+                        <button type="button" id="cancel">Cancel </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" required>
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <div>
-            <label for="registration-number">Registration Number</label>
-            <input type="text" name="regNumber" id="registration-number">
-        </div>
-        <div>
-            <label for="vendor-type">Type</label>
-            <select name="vendorType" id="vendor-type">
-                <option selected value="">Select Category</option>
-            </select>
-        </div>
-        <div>
-            <label for="services">Services Provided</label>
-            <select name="services" id="services">
-                <option disabled selected value="">Select Services</option>
-            </select>
-        </div>
-        <div>
-            <label for="loaction">Location</label>
-            <input type="text" name="location" id="location">
-        </div>
-        <div>
-            <label for="contact-person">Contact Person</label>
-            <input type="text" name="contactPerson" id="contact-person" required>
-        </div>
-        <div>
-            <label for="contact-number">Contact Number</label>
-            <input type="number" name="contactNumber" id="contact-number" maxlength="10" required>
-        </div>
-        <div>
-            <label for="production-capacity">Production Capacity Per Month</label>
-            <input type="number" name="productionCapacity" id="production-capacity" maxlength="10" minlength="10">
-        </div>
-        <div>
-            <button type="submit">
-                <%= msg %>
-            </button>
-            <button type="button" id="cancel">Cancel </button>
-        </div>
-    </form>
+    </div>
+
 </body>
 
 </html>

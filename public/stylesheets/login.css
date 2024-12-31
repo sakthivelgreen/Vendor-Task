@@ -1,0 +1,146 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Wrapper */
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Centered Container */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Input and Select Styling */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-container label {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+.input-container input,
+.input-container select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Focus and Hover States for Inputs and Selects */
+.input-container input:focus,
+.input-container select:focus {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+.input-container select {
+    cursor: pointer;
+}
+
+/* Button Container */
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Login Button */
+button[type="submit"] {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Horizontal Line */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Register Section */
+p {
+    font-size: 14px;
+    text-align: center;
+    color: #555;
+}
+
+p select,
+p button {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .container {
+        padding: 25px 20px;
+    }
+
+    .input-container input,
+    .input-container select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+}

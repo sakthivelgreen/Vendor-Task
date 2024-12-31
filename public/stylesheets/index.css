@@ -1,0 +1,137 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 15px;
+    background-color: #ff6600;
+    padding: 10px;
+    min-width: 900px;
+    color: white;
+}
+
+.success-btn {
+    background-color: #32CD32;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.success-btn:hover {
+    background-color: #228B22;
+}
+
+main {
+    flex: 1 0 700px;
+    padding: 15px;
+}
+
+section [class*='section-body'] {
+    overflow-x: auto;
+}
+
+main [class*="section-head"] button {
+    padding: 8px 16px;
+}
+
+.hidden {
+    display: none;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-body {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+}
+
+aside {
+    flex: 0 0 200px;
+    padding-top: 25px;
+    background-color: #013f7e;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-list a {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    padding-left: 15px;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-list a:hover {
+    background-color: #ff6600;
+}
+
+
+table {
+    width: calc(100% - 50px);
+    border-collapse: collapse;
+    margin: 20px;
+    font-size: 16px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #333;
+    /* Dark gray for table header */
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f4f4f4;
+    /* Light gray for alternating rows */
+}
+
+table tr:hover {
+    background-color: #ffa07a;
+    /* Light coral when hovered */
+    cursor: pointer;
+    /* Changes cursor to indicate the row is clickable */
+}
+
+table tr:hover {
+    background-color: #ddd;
+    /* Lighter gray when hovered */
+}
+
+table td {
+    background-color: white;
+}
+
+table {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
