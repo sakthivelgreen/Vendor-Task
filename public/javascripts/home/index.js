@@ -6,13 +6,15 @@ const contracts_btn = document.querySelector('#contract')
 const vendor_Section = document.querySelector('.vendors-section')
 const user_Section = document.querySelector('.users-section')
 const contract_Section = document.querySelector('.contracts-section')
-
+const filter_category = document.querySelector('#categories');
 
 async function main() {
     logout();
     events();
+    const categories = await getCategories();
     const userObj = await getUsers()
     const vendorObj = await getVendors()
+    setCategories(categories)
     populateTables(userObj, vendorObj)
 }
 main();
@@ -61,10 +63,19 @@ async function getUsers() {
         console.error(err);
     }
 }
+async function getCategories() {
+    try {
+        let response = await fetch('/db/categories')
+        if (!response.ok) throw new Error(response.statusText);
+        return await response.json()
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 function populateTables(user, vendor) {
 
-    let vendorTable = fragmentation(['ID', 'Vendor Name', 'Type', 'Services', 'Contact Person', 'Contact Mobile', 'Location', 'Capacity'], vendor)
+    let vendorTable = fragmentation(['ID', 'Vendor Name', 'Vendor Type', 'Services', 'Contact Person', 'Location'], vendor)
     document.querySelector('#vendors-list__table').appendChild(vendorTable);
 
     let userTable = fragmentation(['ID', 'Name', 'Email', 'Phone'], user)
@@ -95,7 +106,7 @@ function fragmentation(head, body) {
         head.forEach(header => {
             const td = document.createElement('td');
             const key = trimAndLowerCase(header); // Convert header to match normalized keys
-            td.textContent = normalizedRowData[key] !== undefined ? normalizedRowData[key] : '-';
+            td.textContent = (normalizedRowData[key] !== undefined && normalizedRowData[key] !== '') ? normalizedRowData[key] : '-';
             tr.appendChild(td);
         });
 
@@ -128,4 +139,13 @@ function normalizeKeysToLowerCase(obj) {
         }
     }
     return normalizedObj;
+}
+
+function setCategories(cat) {
+    cat.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.category;
+        option.textContent = item.category;
+        filter_category.appendChild(option)
+    })
 }

@@ -26,8 +26,9 @@
                         <a id="vendor">Vendors</a>
                         <a id="user">Users</a>
                         <a id="contract">Contracts</a>
-                        <a id="contract">Ratings</a>
-                        <a id="contract">Performance Scores</a>
+                        <a id="add-category">Add Category</a>
+                        <a id="add-services">Add Services</a>
+                        <a id="ratings">Ratings</a>
                         <a id="logout">Logout</a>
                     </nav>
                 </aside>
@@ -37,6 +38,15 @@
                             <button id="add-vendor" class="success-btn" type="button">Add Vendor</button>
                         </div>
                         <div class="section-body__vendors">
+                            <div class="filter">
+                                <form>
+                                    <span>Filter By</span>
+                                    <select name="categories" id="categories">
+                                        <option value="" selected>Select type</option>
+                                    </select>
+                                    <button type="button" type="submit">Filter</button>
+                                </form>
+                            </div>
                             <table id="vendors-list__table"></table>
                         </div>
                     </section>
