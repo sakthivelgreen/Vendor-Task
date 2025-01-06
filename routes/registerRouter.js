@@ -33,7 +33,7 @@ router.post('/vendor', async (req, res) => {
         // Generate the next ID for the vendor
         const sequenceValue = await getNextSequenceValue('vendors', db);
         const newId = `vendor_${sequenceValue}`;
-        newItem.id = newId;
+        newItem._id = newId;
         userObj._id = newId;
 
         // Insert the new vendor into the collection
@@ -82,7 +82,7 @@ router.post('/user', async (req, res) => {
         // Generate the next ID for the users
         const sequenceValue = await getNextSequenceValue('users', db);
         const newId = `user_${sequenceValue}`;
-        newItem.id = newId;
+        newItem._id = newId;
         userObj._id = newId;
 
         // Insert the new vendor into the collection

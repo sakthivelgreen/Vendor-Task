@@ -23,50 +23,41 @@
             <div class="container-body">
                 <aside>
                     <nav class="nav-list">
-                        <a id="vendor">Vendors</a>
-                        <a id="user">Users</a>
-                        <a id="contract">Contracts</a>
-                        <a id="add-category">Add Category</a>
-                        <a id="add-services">Add Services</a>
+                        <a id="vendors">Vendors</a>
+                        <a id="users">Users</a>
+                        <a id="contracts">Contracts</a>
+                        <a id="add-category">Add Vendor type</a>
                         <a id="ratings">Ratings</a>
                         <a id="logout">Logout</a>
                     </nav>
                 </aside>
                 <main>
-                    <section class="vendors-section">
-                        <div class="section-head__vendors">
+                    <section class="welcome">
+                        <h2>Vendor Dashboard</h2>
+                    </section>
+                    <section class="section hidden main-section">
+                        <div class="section-head">
                             <button id="add-vendor" class="success-btn" type="button">Add Vendor</button>
+                            <button type="button" id="add-user" class="success-btn ">Add User</button>
+                            <button type="button" id="add-contract" class="success-btn ">Add Contract</button>
                         </div>
-                        <div class="section-body__vendors">
+                        <div class="section-body">
                             <div class="filter">
-                                <form>
-                                    <span>Filter By</span>
-                                    <select name="categories" id="categories">
-                                        <option value="" selected>Select type</option>
-                                    </select>
-                                    <button type="button" type="submit">Filter</button>
-                                </form>
+                                <span>Filter By</span>
+                                <select name="filter" id="filter-select">
+                                    <option value="" selected>Select type</option>
+                                    <option value="vendor-id">Vendor ID</option>
+                                    <option value="vendor-type">Vendor type</option>
+                                    <option value="vendor-name">Vendor Name</option>
+                                </select>
+                                <select name="categories" id="categories" class="hidden"></select>
+                                <input type="text" name="search" id="search" class="hidden">
+                                <button type="button" id="filter-btn" class="hidden">Filter</button>
+                                <button type="button" id="clear-btn" class="hidden">Clear</button>
                             </div>
-                            <table id="vendors-list__table"></table>
+                            <table id="data-list__table"></table>
                         </div>
                     </section>
-                    <section class="users-section hidden">
-                        <div class="section-head__users ">
-                            <button type="button" id="add-user" class="success-btn">Add User</button>
-                        </div>
-                        <div class="section-body__users">
-                            <table id="users-list__table"></table>
-                        </div>
-                    </section>
-                    <section class="contracts-section hidden">
-                        <div class="section-head__contracts">
-                            <button type="button" id="add-contract" class="success-btn">Add Contract</button>
-                        </div>
-                        <div class="section-body__contracts">
-                            <table id="contracts-list__table"></table>
-                        </div>
-                    </section>
-
                 </main>
             </div>
         </div>
