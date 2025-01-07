@@ -39,6 +39,7 @@ function events() {
         if (validateDate()) {
             let formData = new FormData(e.target);
             let data = {
+                'contractName': formData.get('contract-name'),
                 'vendorID': vendors_HTML.selectedOptions[0].id,
                 'userID': users_HTML.selectedOptions[0].id,
                 'serviceType': formData.get('service-type'),
@@ -54,7 +55,7 @@ function events() {
                     body: JSON.stringify(data)
                 })
                 if (!response.ok) throw new Error(response.statusText);
-                window.location.href = '/#contract';
+                window.location.href = '/#contracts';
             } catch (error) {
                 console.error(error)
                 throw new Error("Unable to Create Contract");

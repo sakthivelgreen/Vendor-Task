@@ -1,7 +1,8 @@
-import { logout, filterByID, filter_options, filters, filterByName, filterByType, getCategories, getUsers, getContracts, getVendors } from "../lib/lib1.js"
+import { logout, filterByID, filter_options, filters, filterByName, filterByType, getCategories, getUsers, getContracts, getVendors, option_fragment } from "../lib/lib1.js"
 
 const dashboard_section = document.querySelector('.welcome');
 const main_section = document.querySelector('.main-section');
+const overlap_contract_section = document.querySelector('.overlap-contract-section');
 
 const vendors_btn = document.querySelector('#vendors')
 const users_btn = document.querySelector('#users')
@@ -16,16 +17,16 @@ const filter_category = document.querySelector('#categories');
 const filter_btn = document.querySelector('#filter-btn');
 const search_input = document.querySelector('#search');
 const clear_btn = document.querySelector('#clear-btn');
-let userObj, vendorObj, ContractObj;
+let userObj, vendorObj, ContractObj, ContractMap, vendorMap, userMap;
 
 async function main() {
     logout();
     userObj = await getUsers()
     vendorObj = await getVendors()
     ContractObj = await getContracts()
-    userObj = new Map(userObj.map(user => [user._id, user]));
-    vendorObj = new Map(vendorObj.map(vendor => [vendor._id, vendor]));
-    ContractObj = new Map(ContractObj.map(contract => [contract._id, contract]));
+    userMap = new Map(userObj.map(user => [user._id, user]));
+    vendorMap = new Map(vendorObj.map(vendor => [vendor._id, vendor]));
+    ContractMap = new Map(ContractObj.map(contract => [contract._id, contract]));
     events();
 
     const categories = await getCategories();
@@ -49,8 +50,9 @@ function events() {
         document.querySelector('.filter').classList.remove('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
+        overlap_contract_section.classList.add('hidden');
 
-        populateVendors(vendorObj);
+        populateVendors(vendorMap);
 
         add_vendor.classList.remove('hidden');
         add_contract.classList.add('hidden');
@@ -64,8 +66,9 @@ function events() {
         document.querySelector('.filter').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
+        overlap_contract_section.classList.add('hidden');
 
-        populateUsers(userObj);
+        populateUsers(userMap);
 
         add_user.classList.remove('hidden');
         add_vendor.classList.add('hidden');
@@ -80,9 +83,11 @@ function events() {
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
         add_contract.classList.remove('hidden');
+        overlap_contract_section.classList.remove('hidden');
+        document.querySelector('#vendor-filter').appendChild(option_fragment(vendorObj, 'vendorName'));
+        document.querySelector('#user-filter').appendChild(option_fragment(userObj, 'name'));
 
-        populateContracts(ContractObj);
-
+        populateContracts(ContractMap);
         add_vendor.classList.add('hidden');
         add_user.classList.add('hidden');
 
@@ -132,15 +137,15 @@ function events() {
         clear_btn.classList.remove('hidden');
         switch (filter.value) {
             case 'vendor-id':
-                result = filterByID(search_input.value, vendorObj);
+                result = filterByID(search_input.value, vendorMap);
                 result !== undefined ? populateVendors([result]) : alert('Invalid Search');
                 break;
             case 'vendor-name':
-                result = filterByName(search_input.value, vendorObj);
+                result = filterByName(search_input.value, vendorMap);
                 result !== undefined ? populateVendors(result) : alert('Invalid Search');
                 break;
             case 'vendor-type':
-                result = filterByType(filter_category.value, vendorObj)
+                result = filterByType(filter_category.value, vendorMap)
                 result !== undefined ? populateVendors(result) : alert('Invalid Search');
                 break;
             default:
@@ -158,7 +163,48 @@ function events() {
         filter_btn.classList.add('hidden');
         search_input.classList.add('hidden');
     })
+    document.querySelector('#overlap-user__form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.querySelector('#clear-overlap').classList.remove('hidden')
+        let selected_user_id = document.querySelector('#user-filter').selectedOptions[0].id;
+        let selected_vendor_id = document.querySelector('#vendor-filter').selectedOptions[0].id;
+        let contracts = ContractObj.filter(item => item.userID === selected_user_id && item.vendorID === selected_vendor_id)
+        contracts.sort((a, b) => new Date(a.from) - new Date(b.from));
+        let overlapping_contracts = new Set();
+        let filtered_contracts = []
+        for (let i = 0; i < contracts.length; i++) {
+            for (let j = i + 1; j < contracts.length; j++) {
+                if (isOverlapping(contracts[i], contracts[j])) {
+                    overlapping_contracts.add(contracts[i]._id)
+                    overlapping_contracts.add(contracts[j]._id)
+                }
+            }
+        }
+        overlapping_contracts.forEach(item => {
+            filtered_contracts.push(ContractMap.get(item))
+        })
 
+        if (filtered_contracts.length > 0) {
+            populateOverlaps(filtered_contracts)
+        } else {
+            populateOverlaps([])
+        }
+
+        function isOverlapping(contract1, contract2) {
+            return (
+                new Date(contract1.from) <= new Date(contract2.to) && // Condition 1
+                new Date(contract1.to) >= new Date(contract2.from)   // Condition 2
+            );
+        }
+
+    })
+    document.querySelector('#clear-overlap').addEventListener('click', (e) => {
+        e.preventDefault();
+        e.target.classList.add('hidden');
+        document.querySelector('#contract-overlap__table').innerHTML = '';
+        document.querySelector('#user-filter').value = ''
+        document.querySelector('#vendor-filter').value = ''
+    })
 }
 
 function populateUsers(user) {
@@ -170,8 +216,13 @@ function populateVendors(vendor) {
     document.querySelector('#data-list__table').replaceChildren(vendorTable);
 }
 function populateContracts(contracts) {
-    let vendorTable = fragmentation(['ID', 'Vendor ID', 'Service Type', 'User ID', 'From', 'To'], contracts)
+    let vendorTable = fragmentation(['ID', 'Contract Name', 'Vendor ID', 'Service Type', 'User ID', 'From', 'To'], contracts)
     document.querySelector('#data-list__table').replaceChildren(vendorTable);
+}
+function populateOverlaps(contracts) {
+    contracts = new Map(contracts.map(item => [item._id, item]))
+    let overlapTable = fragmentation(['ID', 'Contract Name', 'User ID', 'From', 'To'], contracts);
+    document.querySelector('#contract-overlap__table').replaceChildren(overlapTable);
 }
 
 function fragmentation(head, body) {

@@ -58,6 +58,26 @@
                             <table id="data-list__table"></table>
                         </div>
                     </section>
+                    <section class="overlap-contract-section hidden">
+                        <div class="section-head">
+                            <h3>Overlapping Contracts</h3>
+                        </div>
+                        <div class="section-body">
+                            <form id="overlap-user__form">
+                                <div class="form-input-elements">
+                                    <select name="user-filter" id="user-filter">
+                                        <option value="" selected>Choose User</option>
+                                    </select>
+                                    <select name="vendor-filter" id="vendor-filter">
+                                        <option value="" selected>Choose Vendor</option>
+                                    </select>
+                                    <button type="submit">Search</button>
+                                    <button type="button" id="clear-overlap" class="hidden">clear</button>
+                                </div>
+                            </form>
+                            <table id="contract-overlap__table"></table>
+                        </div>
+                    </section>
                 </main>
             </div>
         </div>
