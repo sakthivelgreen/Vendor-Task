@@ -17,6 +17,45 @@ export function logout() {
             });
     });
 }
+
+export async function getVendors() {
+    try {
+        let response = await fetch('/vendor/list')
+        if (!response.ok) throw new Error(response.statusText);
+        return await response.json()
+    } catch (err) {
+        console.error(err);
+    }
+}
+export async function getUsers() {
+    try {
+        let response = await fetch('/user/list')
+        if (!response.ok) throw new Error(response.statusText);
+        return await response.json()
+    } catch (err) {
+        console.error(err);
+    }
+}
+export async function getCategories() {
+    try {
+        let response = await fetch('/db/categories')
+        if (!response.ok) throw new Error(response.statusText);
+        return await response.json()
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function getContracts() {
+    try {
+        let response = await fetch('/contract/list')
+        if (!response.ok) throw new Error(response.statusText);
+        return await response.json()
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 export const filter_options = {
     'vendors': {
         'Select Option': '',
@@ -63,4 +102,16 @@ export function filterByType(search_key, obj) {
         const result = Array.from(obj).filter(item => item[1].vendorType.trim().toLowerCase() === search_key.trim().toLowerCase());
         return new Map(result)
     }
+}
+
+export function option_fragment(arr, key) {
+    let fragment = document.createDocumentFragment();
+    arr.forEach(item => {
+        let option = document.createElement('option');
+        option.value = item[key];
+        option.id = item._id;
+        option.textContent = item[key];
+        fragment.appendChild(option);
+    });
+    return fragment;
 }

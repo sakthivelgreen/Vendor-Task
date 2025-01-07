@@ -1,4 +1,4 @@
-import { logout, filterByID, filter_options, filters, filterByName, filterByType } from "../lib/lib1.js"
+import { logout, filterByID, filter_options, filters, filterByName, filterByType, getCategories, getUsers, getContracts, getVendors } from "../lib/lib1.js"
 
 const dashboard_section = document.querySelector('.welcome');
 const main_section = document.querySelector('.main-section');
@@ -16,14 +16,16 @@ const filter_category = document.querySelector('#categories');
 const filter_btn = document.querySelector('#filter-btn');
 const search_input = document.querySelector('#search');
 const clear_btn = document.querySelector('#clear-btn');
-let userObj, vendorObj;
+let userObj, vendorObj, ContractObj;
 
 async function main() {
     logout();
     userObj = await getUsers()
     vendorObj = await getVendors()
+    ContractObj = await getContracts()
     userObj = new Map(userObj.map(user => [user._id, user]));
     vendorObj = new Map(vendorObj.map(vendor => [vendor._id, vendor]));
+    ContractObj = new Map(ContractObj.map(contract => [contract._id, contract]));
     events();
 
     const categories = await getCategories();
@@ -43,36 +45,49 @@ function refresh() {
 
 function events() {
     vendors_btn.addEventListener('click', () => {
+
         document.querySelector('.filter').classList.remove('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
+
         populateVendors(vendorObj);
+
         add_vendor.classList.remove('hidden');
         add_contract.classList.add('hidden');
         add_user.classList.add('hidden');
+
         filter.replaceChildren(filters(filter_options.vendors));
+
         window.location.hash = 'vendors';
     })
     users_btn.addEventListener('click', () => {
         document.querySelector('.filter').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
+
         populateUsers(userObj);
+
         add_user.classList.remove('hidden');
         add_vendor.classList.add('hidden');
         add_contract.classList.add('hidden');
 
         filter.replaceChildren(filters(filter_options.users))
+
         window.location.hash = 'users';
     })
     contracts_btn.addEventListener('click', () => {
         document.querySelector('.filter').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
-        add_contract.classList.remove('hidden')
-        add_vendor.classList.add('hidden')
-        add_user.classList.add('hidden')
+        add_contract.classList.remove('hidden');
+
+        populateContracts(ContractObj);
+
+        add_vendor.classList.add('hidden');
+        add_user.classList.add('hidden');
+
         filter.replaceChildren(filters(filter_options.contracts));
+
         window.location.hash = 'contracts';
     })
     add_vendor.addEventListener('click', (e) => {
@@ -83,6 +98,7 @@ function events() {
         e.preventDefault();
         window.location.href = '/register/user';
     })
+    add_contract.addEventListener('click', () => { window.location.href = '/contract/add' })
     filter.addEventListener('change', (e) => {
         switch (e.target.value) {
             case '':
@@ -145,40 +161,16 @@ function events() {
 
 }
 
-async function getVendors() {
-    try {
-        let response = await fetch('/vendor/list')
-        if (!response.ok) throw new Error(response.statusText);
-        return await response.json()
-    } catch (err) {
-        console.error(err);
-    }
-}
-async function getUsers() {
-    try {
-        let response = await fetch('/user/list')
-        if (!response.ok) throw new Error(response.statusText);
-        return await response.json()
-    } catch (err) {
-        console.error(err);
-    }
-}
-async function getCategories() {
-    try {
-        let response = await fetch('/db/categories')
-        if (!response.ok) throw new Error(response.statusText);
-        return await response.json()
-    } catch (err) {
-        console.error(err);
-    }
-}
-
 function populateUsers(user) {
     let userTable = fragmentation(['ID', 'Name', 'Email', 'Phone'], user)
     document.querySelector('#data-list__table').replaceChildren(userTable);
 }
 function populateVendors(vendor) {
     let vendorTable = fragmentation(['ID', 'Vendor Name', 'Vendor Type', 'Contact Person', 'Location'], vendor)
+    document.querySelector('#data-list__table').replaceChildren(vendorTable);
+}
+function populateContracts(contracts) {
+    let vendorTable = fragmentation(['ID', 'Vendor ID', 'Service Type', 'User ID', 'From', 'To'], contracts)
     document.querySelector('#data-list__table').replaceChildren(vendorTable);
 }
 

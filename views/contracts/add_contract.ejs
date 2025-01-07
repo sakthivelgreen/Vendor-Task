@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <script type="module" src="/javascripts/contracts/add_contract.js" defer></script>
+</head>
+<div class="wrapper">
+    <div class="container">
+        <main>
+            <div class="form-container">
+                <form id="add-contract">
+                    <div class="form-head">
+                        <h3>Add Contract</h3>
+                    </div>
+                    <div class="form-body">
+                        <div class="form-input-div">
+                            <label for="">Contract Name</label>
+                            <input type="text" class="form-input-elements" name="contract-name" id="contract-name"
+                                required>
+                        </div>
+                        <div class="form-input-div">
+                            <label for="">Choose Category</label>
+                            <select name="service-type" id="service-type" class="form-input-elements" required>
+                                <option value="" selected>Choose Category</option>
+                            </select>
+                        </div>
+                        <div class="form-input-div">
+                            <label for="">Choose Vendor</label>
+                            <select name="vendor" id="vendor" class="form-input-elements" required></select>
+                        </div>
+                        <div class="form-input-div">
+                            <label for="">Choose User</label>
+                            <select name="user" id="user" class="form-input-elements" required></select>
+                        </div>
+                        <div class="form-input-div">
+                            <label for="">From</label>
+                            <input type="date" class="form-input-elements" name="from-date" id="from-date" required>
+                        </div>
+                        <div class="form-input-div">
+                            <label for="">To</label>
+                            <input type="date" class="form-input-elements" name="to-date" id="to-date" required>
+                        </div>
+                        <div class="form-btn-div">
+                            <button type="submit">
+                                <%= type %>
+                            </button>
+                            <button type="button" id="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+<body>
+
+</body>
+
+</html>
