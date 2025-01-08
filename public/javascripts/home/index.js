@@ -49,8 +49,8 @@ function refresh() { // Selecting the section based on url hash
 
 function events() {
     vendors_btn.addEventListener('click', () => {
-
         document.querySelector('.filter').classList.remove('hidden')
+        document.querySelector('#add-categories').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
         overlap_contract_section.classList.add('hidden');
@@ -66,6 +66,7 @@ function events() {
     })
     users_btn.addEventListener('click', () => {
         document.querySelector('.filter').classList.add('hidden')
+        document.querySelector('#add-categories').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
         overlap_contract_section.classList.add('hidden');
@@ -82,6 +83,7 @@ function events() {
     // Contract Section - aside section Contracts btn Event
     contracts_btn.addEventListener('click', () => {
         document.querySelector('.filter').classList.add('hidden')
+        document.querySelector('#add-categories').classList.add('hidden')
         main_section.classList.remove('hidden');
         dashboard_section.classList.add('hidden');
         add_contract.classList.remove('hidden');
@@ -226,7 +228,42 @@ function events() {
     })
 
     document.querySelector('#ratings').addEventListener('click', () => { window.location.href = `/vendor/ratings` })
+    document.querySelector('#add-category').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('#add-categories').classList.remove('hidden')
+        document.querySelector('.filter').classList.add('hidden')
+        main_section.classList.add('hidden');
+        dashboard_section.classList.add('hidden');
+        overlap_contract_section.classList.add('hidden');
+        add_user.classList.add('hidden');
+        add_vendor.classList.add('hidden');
+        add_contract.classList.add('hidden');
+        window.location.hash = 'add-category';
+    })
+    document.querySelector('#category-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (document.querySelector('#cat-name').value !== '') {
+            let obj = {
+                'category': document.querySelector('#cat-name').value
+            }
+            try {
+                let response = await fetch('/vendor/category-add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                if (!response.ok) throw new Error(response.statusText)
+                alert('Category Added Successfully')
+            } catch (error) {
+                console.error(error)
+                throw new Error(error);
 
+            }
+        }
+
+    })
 }
 
 // for user table 

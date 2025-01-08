@@ -36,10 +36,24 @@ router.post('/ratings', upload.none(), async (req, res) => {
     try {
         let result = await db.collection('ratings').insertOne(new_item);
         if (result) {
-            res.status(200).send('data received');
+            res.status(200).send('Ratings Added!');
         }
     } catch (error) {
         res.status(500).send('Could not add ratings');
+    }
+
+})
+
+router.post('/category-add', async (req, res) => {
+    let new_item = req.body;
+    try {
+        let result = await db.collection('categories').insertOne(new_item);
+        if (result) {
+            res.status(200).send('Category Added Successfully')
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Error Creating Category')
     }
 
 })
