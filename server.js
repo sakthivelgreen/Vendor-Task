@@ -67,7 +67,9 @@ app.use('/contract', checkLogin, contractRouter);
 app.use('/db', mongodbRouter);
 app.use('/register', registerRouter);
 app.use('/auth', loginRouter);
-
+app.get('/api/user-data', (req, res) => {
+    res.json({ name: req.session.user.name, type: req.session.user.type, id: req.session.user.id });
+});
 app.listen(port, () => {
     console.log(`Server at http://localhost:${port}`)
 });

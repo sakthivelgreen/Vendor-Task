@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <script type="module" src="/javascripts/vendors/ratings.js" defer></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <main>
+                <section class="form-section">
+                    <div class="form-container">
+                        <div class="form-head">
+                            <h2>Rate Vendors</h2>
+                        </div>
+                        <div class="form-body">
+                            <form id="rating-form">
+                                <div class="form-input-div">
+                                    <label for="vendor">Choose Vendor</label>
+                                    <select name="vendor" id="vendor" required>
+                                        <option value="" selected>Choose..</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="contract">Choose Contract</label>
+                                    <select name="contract" id="contract" required>
+                                        <option value="" selected>Choose..</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="quality">Quality</label>
+                                    <select name="quality" id="quality">
+                                        <option value="1" id="1">1 (Poor)</option>
+                                        <option value="2" id="2">2 (Average)</option>
+                                        <option value="3" id="3">3 (Medium)</option>
+                                        <option value="4" id="4">4 (Good)</option>
+                                        <option value="5" id="5">5 (Excellent)</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="service">Service</label>
+                                    <select name="service" id="service">
+                                        <option value="1" id="1">1 (Poor)</option>
+                                        <option value="2" id="2">2 (Average)</option>
+                                        <option value="3" id="3">3 (Medium)</option>
+                                        <option value="4" id="4">4 (Good)</option>
+                                        <option value="5" id="5">5 (Excellent)</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="delivery">Delivery</label>
+                                    <select name="delivery" id="delivery">
+                                        <option value="1" id="1">1 (Poor)</option>
+                                        <option value="2" id="2">2 (Average)</option>
+                                        <option value="3" id="3">3 (Medium)</option>
+                                        <option value="4" id="4">4 (Good)</option>
+                                        <option value="5" id="5">5 (Excellent)</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="assist">Assist</label>
+                                    <select name="assist" id="assist">
+                                        <option value="1" id="1">1 (Poor)</option>
+                                        <option value="2" id="2">2 (Average)</option>
+                                        <option value="3" id="3">3 (Medium)</option>
+                                        <option value="4" id="4">4 (Good)</option>
+                                        <option value="5" id="5">5 (Excellent)</option>
+                                    </select>
+                                </div>
+                                <div class="form-input-div">
+                                    <label for="support">Support</label>
+                                    <select name="support" id="support">
+                                        <option value="1" id="1">1 (Poor)</option>
+                                        <option value="2" id="2">2 (Average)</option>
+                                        <option value="3" id="3">3 (Medium)</option>
+                                        <option value="4" id="4">4 (Good)</option>
+                                        <option value="5" id="5">5 (Excellent)</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <div class="form-btn-div">
+                                    <button type="submit">Rate</button>
+                                    <button type="button" id="Cancel">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
