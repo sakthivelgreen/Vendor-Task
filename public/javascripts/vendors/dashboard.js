@@ -7,12 +7,17 @@ async function main() {
     vendor = await getVendors();
     contracts = await getContracts();
     current_user = await getUserDetails();
-    vendor = vendor.filter(item => item._id === current_user.id);
+    vendor = vendor.reduce((acc, item) => {
+        return acc || (item._id === current_user.id ? item : null);
+    }, null);
     contracts = contracts.filter(item => item.vendorID == current_user.id)
     ContractMap = new Map(contracts.map(contract => [contract._id, contract]));
+    console.log(vendor);
+
     logout();
     events();
     refresh();
+    populateDetails();
 } main() // Script Starts here
 
 function events() {
@@ -35,4 +40,12 @@ function events() {
 function populateContracts(contracts) {
     let contractTable = table_fragment(['ID', 'Contract Name', 'Vendor ID', 'Service Type', 'User ID', 'From', 'To'], contracts)
     document.querySelector('#data-list__table').replaceChildren(contractTable);
+}
+
+function populateDetails() {
+    document.querySelector('#service-span-td').textContent = vendor.vendorType;
+    document.querySelector('#capacity-span-td').textContent = vendor.productionCapacity;
+    document.querySelector('#registration-span-td').textContent = vendor.regNumber;
+    document.querySelector('#phone-span-td').textContent = vendor.contactNumber;
+    document.querySelector('#location-span-td').textContent = vendor.location;
 }

@@ -6,6 +6,7 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
     <link rel="stylesheet" href="/stylesheets/root.css">
     <link rel="stylesheet" href="/stylesheets/layouts.css">
     <script type="module" src="/javascripts/vendors/dashboard.js" defer></script>
@@ -36,7 +37,50 @@
                             <h2>Dashboard - <%= data.name %>
                             </h2>
                         </div>
-                        <div class="section-body"></div>
+                        <div class="section-body">
+                            <div class="tiles">
+                                <div class="onGoing-contracts tile-box">
+                                    <div class="title">On Going</div>
+                                    <div class="body">0</div>
+                                </div>
+                                <div class="Completed-contracts tile-box">
+                                    <div class="title">Completed</div>
+                                    <div class="body">0</div>
+                                </div>
+                                <div class="requested-contracts tile-box">
+                                    <div class="title">Requested</div>
+                                    <div class="body">0</div>
+                                </div>
+                                <div class="Available Capcity tile-box">
+                                    <div class="title">Available Capacity</div>
+                                    <div class="body">0</div>
+                                </div>
+                            </div>
+                            <div class="vendor-details">
+                                <table>
+                                    <tr>
+                                        <td>Service Provided</td>
+                                        <td><span id="service-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Production Capacity</td>
+                                        <td><span id="capacity-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Registration ID</td>
+                                        <td><span id="registration-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Phone</td>
+                                        <td><span id="phone-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location</td>
+                                        <td><span id="location-span-td"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </section>
                     <section id="contracts-section" class="hidden">
                         <div class="section-head">
