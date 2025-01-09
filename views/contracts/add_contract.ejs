@@ -37,30 +37,33 @@
                                 <select name="vendor" id="vendor" class="form-input-elements" required></select>
                             </div>
                             <% } %>
-                                <div class="form-input-div">
-                                    <label for="user">Choose User</label>
-                                    <select name="user" id="user" class="form-input-elements" required></select>
-                                </div>
-                                <div class="form-input-div">
-                                    <label for="from-date">From</label>
-                                    <input type="date" class="form-input-elements" name="from-date" id="from-date"
-                                        required>
-                                </div>
-                                <div class="form-input-div">
-                                    <label for="to-date">To</label>
-                                    <input type="date" class="form-input-elements" name="to-date" id="to-date" required>
-                                </div>
-                                <div class="form-input-div">
-                                    <label for="contract-description">Description</label>
-                                    <textarea name="contract-description" id="contract-description" cols="30"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="form-btn-div">
-                                    <button type="submit">
-                                        <%= type %>
-                                    </button>
-                                    <button type="button" id="cancel">Cancel</button>
-                                </div>
+                                <% if(data.type !=='user' ) { %>
+                                    <div class="form-input-div">
+                                        <label for="user">Choose User</label>
+                                        <select name="user" id="user" class="form-input-elements" required></select>
+                                    </div>
+                                    <% } %>
+                                        <div class="form-input-div">
+                                            <label for="from-date">From</label>
+                                            <input type="date" class="form-input-elements" name="from-date"
+                                                id="from-date" required>
+                                        </div>
+                                        <div class="form-input-div">
+                                            <label for="to-date">To</label>
+                                            <input type="date" class="form-input-elements" name="to-date" id="to-date"
+                                                required>
+                                        </div>
+                                        <div class="form-input-div">
+                                            <label for="contract-description">Description</label>
+                                            <textarea name="contract-description" id="contract-description" cols="30"
+                                                rows="5"></textarea>
+                                        </div>
+                                        <div class="form-btn-div">
+                                            <button type="submit">
+                                                <%= type %>
+                                            </button>
+                                            <button type="button" id="cancel">Cancel</button>
+                                        </div>
                     </div>
                 </form>
             </div>

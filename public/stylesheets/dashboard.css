@@ -39,7 +39,8 @@
     font-size: 25px !important;
 }
 
-.vendor-details {
+.vendor-details,
+.user-details {
     margin-top: 15px;
 }
 

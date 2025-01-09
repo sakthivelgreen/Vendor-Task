@@ -7,6 +7,7 @@
     </title>
     <link rel="stylesheet" href="/stylesheets/root.css">
     <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
     <link rel="stylesheet" href="/stylesheets/layouts.css">
     <script type="module" src="/javascripts/users/dashboard.js" defer></script>
 </head>
@@ -26,13 +27,66 @@
                 <aside>
                     <nav class="nav-list">
                         <a id="home">Home</a>
-                        <a id="vendors">Vendors</a>
+                        <!-- <a id="vendors">Vendors</a> -->
                         <a id="contracts">Contracts</a>
                         <a id="vendor-ratings">Ratings</a>
                         <a id="logout">Logout</a>
                     </nav>
                 </aside>
-                <main></main>
+                <main>
+                    <section id="home-section" class='home-section'>
+                        <div class="section-head">
+                            <h2>Dashboard - <%= data.name %>
+                            </h2>
+                        </div>
+                        <div class="section-body">
+                            <div class="tiles">
+                                <h2>Contract Details</h2>
+                                <div class="onGoing-contracts tile-box">
+                                    <div class="title">On Going</div>
+                                    <div class="body">0</div>
+                                </div>
+                                <div class="Completed-contracts tile-box">
+                                    <div class="title">Completed</div>
+                                    <div class="body">0</div>
+                                </div>
+                                <div class="requested-contracts tile-box">
+                                    <div class="title">Requested</div>
+                                    <div class="body">0</div>
+                                </div>
+                            </div>
+                            <div class="user-details">
+                                <table>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td><span id="name-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>User ID</td>
+                                        <td><span id="userID-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><span id="email-span-td"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Phone</td>
+                                        <td><span id="phone-span-td"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="contracts-section" class="hidden">
+                        <div class="section-head">
+                            <button type="button" id="add-contract" class="success-btn ">Add Contract</button>
+                        </div>
+                        <div class="section-body">
+                            <table id="data-list__table"></table>
+                        </div>
+                    </section>
+
+                </main>
             </div>
 
         </div>

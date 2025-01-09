@@ -20,7 +20,9 @@ function processHTML() {
     if (current_user.type == 'admin' || current_user.type == 'user') {
         service_type_HTML.appendChild(option_fragment(categoriesObj, 'category'))
     }
-    users_HTML.appendChild(option_fragment(usersObj, 'name'))
+    if (current_user.type == 'admin' || current_user.type == 'vendor') {
+        users_HTML.appendChild(option_fragment(usersObj, 'name'))
+    }
 }
 
 function events() {
@@ -45,7 +47,6 @@ function events() {
             let formData = new FormData(e.target);
             let data = {
                 'contractName': formData.get('contract-name'),
-                'userID': users_HTML.selectedOptions[0].id,
                 'from': formData.get('from-date'),
                 'to': formData.get('to-date'),
                 'desc': formData.get('contract-description')
@@ -53,9 +54,15 @@ function events() {
             if (current_user.type === 'admin') {
                 data.vendorID = vendors_HTML.selectedOptions[0].id;
                 data.serviceType = formData.get('service-type');
-            } else {
+                data.userID = users_HTML.selectedOptions[0].id;
+            } else if (current_user.type == 'vendor') {
                 data.vendorID = current_user.id;
                 data.serviceType = vendorMap.get(current_user.id).vendorType; // get service type form vendors obj
+                data.userID = users_HTML.selectedOptions[0].id;
+            } else {
+                data.vendorID = vendors_HTML.selectedOptions[0].id;
+                data.serviceType = formData.get('service-type');
+                data.userID = current_user.id;
             }
             try {
                 let response = await fetch('/contract/add', {
