@@ -227,6 +227,7 @@ function events() {
         document.querySelector('#vendor-filter').value = ''
     })
 
+    // Adding Ratings to Vendors - redirect
     document.querySelector('#ratings').addEventListener('click', () => { window.location.href = `/vendor/ratings` })
     document.querySelector('#add-category').addEventListener('click', (e) => {
         e.preventDefault();
@@ -240,6 +241,7 @@ function events() {
         add_contract.classList.add('hidden');
         window.location.hash = 'add-category';
     })
+    // Adding Vendor Category
     document.querySelector('#category-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         if (document.querySelector('#cat-name').value !== '') {

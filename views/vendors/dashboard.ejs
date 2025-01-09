@@ -30,7 +30,23 @@
                         <a id="logout">Logout</a>
                     </nav>
                 </aside>
-                <main></main>
+                <main>
+                    <section id="home-section" class='home-section'>
+                        <div class="section-head">
+                            <h2>Dashboard - <%= data.name %>
+                            </h2>
+                        </div>
+                        <div class="section-body"></div>
+                    </section>
+                    <section id="contracts-section" class="hidden">
+                        <div class="section-head">
+                            <button type="button" id="add-contract" class="success-btn ">Add Contract</button>
+                        </div>
+                        <div class="section-body">
+                            <table id="data-list__table"></table>
+                        </div>
+                    </section>
+                </main>
             </div>
 
         </div>

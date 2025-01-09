@@ -31,8 +31,8 @@ router.get('/list', async (req, res) => {
 })
 router.get('/add', async (req, res) => {
     if (req.session.user) {
-        let type = req.session.user.type === 'admin' ? 'Add' : 'Make Request';
-        res.render('contracts/add_contract', { title: 'Add Contract', type: type })
+        let type = req.session.user.type !== 'user' ? 'Add' : 'Make Request';
+        res.render('contracts/add_contract', { title: 'Add Contract', type: type, data: req.session.user })
     }
 });
 router.post('/add', async (req, res) => {
