@@ -29,17 +29,29 @@ router.get('/dashboard', async (req, res) => {
 });
 
 router.get('/ratings', async (req, res) => {
-    res.render('vendors/ratings', { title: "Rate Vendor", data: req.session.user })
+    if (req.session.user.type !== 'vendor') {
+        res.render('vendors/ratings', { title: "Rate Vendor", data: req.session.user })
+    } else res.redirect('/')
 })
 router.post('/ratings', upload.none(), async (req, res) => {
     const new_item = req.body;
     try {
-        let result = await db.collection('ratings').insertOne(new_item);
-        if (result) {
-            res.status(200).send('Ratings Added!');
+        const query = { _id: new_item._id };
+        const update = { $set: new_item };
+        const options = { upsert: true };
+
+        let result = await db.collection('ratings').updateOne(query, update, options);
+
+        if (result.upsertedId) {
+            res.status(200).send('Ratings added!');
+        } else if (result.matchedCount > 0) {
+            res.status(200).send('Ratings updated!');
+        } else {
+            res.status(200).send('No changes made.');
         }
     } catch (error) {
-        res.status(500).send('Could not add ratings');
+        console.error(error);
+        res.status(500).send('Could not add or update ratings');
     }
 
 })

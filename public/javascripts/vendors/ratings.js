@@ -41,7 +41,7 @@ async function submitRatings() {
         const formData = new FormData(document.querySelector('#rating-form'));
         let USER = user.type !== 'admin' ? user.id : 'admin';
         formData.append('user', USER)
-        formData.append('_id', vendors_html.selectedOptions[0].id)
+        formData.append('_id', contracts_html.selectedOptions[0].id)
         formData.append('contractID', contracts_html.selectedOptions[0].id)
         formData.append('vendorID', vendors_html.selectedOptions[0].id)
         let average = getAverage([formData.get('quality'), formData.get('service'), formData.get('delivery'), formData.get('support'), formData.get('assist')])
