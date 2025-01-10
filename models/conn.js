@@ -1,7 +1,7 @@
 require('dotenv').config();
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-const uri = process.env.Mongo_URI;
+const uri = `${process.env.Mongo_URI}`;
 const client = new MongoClient(uri);
 let conn, db;
 // Connect to MongoDB Atlas
