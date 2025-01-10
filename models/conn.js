@@ -1,8 +1,9 @@
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 
-const uri = `${process.env.Mongo_URI}`;
-const client = new MongoClient(uri);
+const USER = `${process.env.DB_USER}`;
+const PASS = `${process.env.DB_PASS}`;
+const client = new MongoClient(`mongodb+srv://${USER}:${PASS}@cluster0.tukhc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
 let conn, db;
 // Connect to MongoDB Atlas
 async function connectToMongoDB(databaseName = 'vendor-management') {
