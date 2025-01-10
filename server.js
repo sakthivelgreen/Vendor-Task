@@ -16,20 +16,23 @@ const registerRouter = require('./routes/registerRouter');
 const app = express();
 // Set up session management
 const MongoStore = require('connect-mongo');
-
+const mongo_uri = `${process.env.MONGO_URI}`;
+const auth_db = `${process.env.AUTH_DB}`;
+const secretKey = `${process.env.SESSION_SECRET}`;
+const con_secure = `${process.env.NODE_ENV}` === 'production';
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
+        secret: secretKey,
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
-            mongoUrl: process.env.MONGO_URI,
-            dbName: process.env.AUTH_DB,
+            mongoUrl: mongo_uri,
+            dbName: auth_db,
             collectionName: 'sessions',
         }),
         cookie: {
             maxAge: 3600000,
-            secure: process.env.NODE_ENV === 'production',
+            secure: con_secure,
             sameSite: 'lax',
         },
     })
